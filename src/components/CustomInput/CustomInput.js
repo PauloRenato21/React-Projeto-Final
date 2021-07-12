@@ -46,6 +46,9 @@ export default function CustomInput(props) {
     minLength:
       inputProps && inputProps.minLength ? inputProps.minLength : undefined,
     step: inputProps && inputProps.step ? inputProps.step : undefined,
+    required:
+      inputProps && inputProps.required ? inputProps.required : undefined,
+    pattern: inputProps && inputProps.pattern ? inputProps.pattern : undefined,
   };
   return (
     <FormControl
