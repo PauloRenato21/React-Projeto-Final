@@ -18,6 +18,7 @@
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
+<<<<<<< HEAD
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import BubbleChart from "@material-ui/icons/BubbleChart";
 import LocationOn from "@material-ui/icons/LocationOn";
@@ -33,12 +34,40 @@ import Icons from "views/Icons/Icons.js";
 import Maps from "views/Maps/Maps.js";
 import NotificationsPage from "views/Notifications/Notifications.js";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
+=======
+import PeopleIcon from "@material-ui/icons/People";
+import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
+import CategoryIcon from "@material-ui/icons/Category";
+import SportsSoccerIcon from "@material-ui/icons/SportsSoccer";
+import BusinessIcon from "@material-ui/icons/Business";
+import Unarchive from "@material-ui/icons/Unarchive";
+import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
+// core components/views for Admin layout
+import Home from "views/Home/Home";
+import AtletaHome from "views/Atleta/Index.js";
+import AtletaCreate from "views/Atleta/AtletaCreate";
+import ResponsavelHome from "views/Responsavel/Index.js";
+import FuncionarioHome from "views/Funcionario/Index.js";
+import FuncionarioCreate from "views/Funcionario/FuncionarioCreate";
+import CargoHome from "views/Cargo/Index.js";
+import CargoCreate from "views/Cargo/CargoCreate";
+import TurmaHome from "views/Turma/Index.js";
+import TurmaCreate from "views/Turma/TurmaCreate";
+import CategoriaHome from "views/Categoria/Index.js";
+import CategoriaCreate from "views/Categoria/CategoriaCreate";
+import ClubeHome from "views/Clube/Index.js";
+import ClubeCreate from "views/Clube/ClubeCreate";
+import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
+import FranquiaHome from "views/Franquia/Index";
+import FranquiaCreate from "views/Franquia/FranquiaCreate";
+>>>>>>> 3be954db4e5cb61898cbe85317e10b8ad00f9494
 // core components/views for RTL layout
 // import RTLPage from "views/RTLPage/RTLPage.js";
 
 const dashboardRoutes = [
   {
     path: "/dashboard",
+<<<<<<< HEAD
     name: "Dashboard",
     rtlName: "لوحة القيادة",
     icon: Dashboard,
@@ -92,6 +121,123 @@ const dashboardRoutes = [
     icon: Notifications,
     component: NotificationsPage,
     layout: "/admin",
+=======
+    name: "Home Administrador",
+    icon: Dashboard,
+    component: Home,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/atleta",
+    name: "Dashboard Atleta",
+    icon: Person,
+    component: AtletaHome,
+    layout: "/admin",
+  },
+  {
+    path: "/cadastrar/atleta",
+    name: "Atleta Cadastrar",
+    component: AtletaCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/responsavel",
+    name: "Dashboard Responsável",
+    icon: PeopleIcon,
+    component: ResponsavelHome,
+    layout: "/admin",
+  },
+  {
+    path: "/funcionario",
+    name: "Dashboard Funcionário",
+    icon: "content_paste",
+    component: FuncionarioHome,
+    layout: "/admin",
+  },
+  {
+    path: "/cadastrar/funcionario",
+    name: "Funcionário Cadastrar",
+    component: FuncionarioCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/cargo",
+    name: "Dashboard Cargo",
+    icon: AssignmentIndIcon,
+    component: CargoHome,
+    layout: "/admin",
+  },
+  {
+    path: "/cadastrar/cargo",
+    name: "Dashboard Cargo",
+    icon: AssignmentIndIcon,
+    component: CargoCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/turma",
+    name: "Dashboard Turma",
+    icon: SupervisedUserCircleIcon,
+    component: TurmaHome,
+    layout: "/admin",
+  },
+  {
+    path: "/cadastrar/turma",
+    name: "Dashboard Turma",
+    icon: SupervisedUserCircleIcon,
+    component: TurmaCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/categoria",
+    name: "Dashboard Categoria",
+    icon: CategoryIcon,
+    component: CategoriaHome,
+    layout: "/admin",
+  },
+  {
+    path: "/cadastrar/categoria",
+    name: "Categoria Cadastrar",
+    icon: CategoryIcon,
+    component: CategoriaCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/clube",
+    name: "Dashboard Clube Futebol",
+    icon: SportsSoccerIcon,
+    component: ClubeHome,
+    layout: "/admin",
+  },
+  {
+    path: "/cadastrar/clube",
+    name: "Dashboard Clube Futebol",
+    icon: SportsSoccerIcon,
+    component: ClubeCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/franquia",
+    name: "Dashboard Franquia",
+    icon: BusinessIcon,
+    component: FranquiaHome,
+    layout: "/admin",
+  },
+  {
+    path: "/cadastrar/franquia",
+    name: "Dashboard Franquia",
+    icon: BusinessIcon,
+    component: FranquiaCreate,
+    layout: "/admin",
+    invisible: true,
+>>>>>>> 3be954db4e5cb61898cbe85317e10b8ad00f9494
   },
   // {
   //   path: "/rtl-page",
@@ -104,7 +250,10 @@ const dashboardRoutes = [
   {
     path: "/upgrade-to-pro",
     name: "Upgrade To PRO",
+<<<<<<< HEAD
     rtlName: "التطور للاحترافية",
+=======
+>>>>>>> 3be954db4e5cb61898cbe85317e10b8ad00f9494
     icon: Unarchive,
     component: UpgradeToPro,
     layout: "/admin",
