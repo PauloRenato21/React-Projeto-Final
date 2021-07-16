@@ -9,8 +9,8 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
-import OptionsTurma from "views/Turma/OptionTurma";
-import OptionResp from "views/Responsavel/OptionResp";
+import OptionResp from "components/Options/OptionsResp";
+import OptionsTurma from "components/Options/OptionsTurma";
 import api from "API/Api";
 
 const styles = {
