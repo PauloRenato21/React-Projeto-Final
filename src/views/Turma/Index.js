@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -8,6 +8,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
+import api from "API/Api";
 
 const styles = {
   buttonNewAtleta: {
@@ -28,6 +29,16 @@ const useStyles = makeStyles(styles);
 
 export default function Index() {
   const classes = useStyles();
+
+  const [turmas, setTurma] = useState([]);
+
+  useEffect(() => {
+    api.get("http://api.com/turma").then((res) => {
+      const dadosTurma = res.data;
+      setTurma(dadosTurma);
+    });
+  }, []);
+
   return (
     <div>
       <GridContainer>
@@ -40,56 +51,59 @@ export default function Index() {
               </a>
             </CardHeader>
             <CardBody>
-              <Table
-                tableHeaderColor="warning"
-                tableHead={[
-                  "ID",
-                  "Nome",
-                  "Turno",
-                  "Horario Inicial",
-                  "Horario Final",
-                  "Categoria",
-                  "Franquia",
-                  "Editar",
-                  "Excluir",
-                ]}
-                tableData={[
-                  [
-                    "1",
-                    "Dakota Rice",
-                    "$36,738",
-                    "Niger",
-                    "Rua Teste A",
-                    "Brasileiro",
-                    "99999999999",
-                    <button
-                      // onClick={() =>
-                      //   (location.href = `/admin/atualizar/atleta?${atl.id}`)
-                      // }
-                      // id={atl.id}
-                      key="1"
-                      style={{
-                        border: "none",
-                        background: "none",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <Edit htmlColor="#00acc1" />
-                    </button>,
-                    <button
-                      onClick="{() => setValueId(atl.id)}"
-                      key="1"
-                      style={{
-                        border: "none",
-                        background: "none",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <Close htmlColor="red" />
-                    </button>,
-                  ],
-                ]}
-              />
+              {turmas.map((turmas) => (
+                <Table
+                  key={turmas.id}
+                  tableHeaderColor="warning"
+                  tableHead={[
+                    "ID",
+                    "Nome",
+                    "Turno",
+                    "Horario Inicial",
+                    "Horario Final",
+                    "Categoria",
+                    "Franquia",
+                    "Editar",
+                    "Excluir",
+                  ]}
+                  tableData={[
+                    [
+                      turmas.id,
+                      turmas.nome,
+                      turmas.turno,
+                      turmas.horario_inicial,
+                      turmas.horario_termino,
+                      turmas.fk_categoria_id,
+                      turmas.fk_franquias_id,
+                      <button
+                        // onClick={() =>
+                        //   (location.href = `/admin/atualizar/atleta?${atl.id}`)
+                        // }
+                        id={turmas.id}
+                        key="1"
+                        style={{
+                          border: "none",
+                          background: "none",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <Edit htmlColor="#00acc1" />
+                      </button>,
+                      <button
+                        onClick="{() => setValueId(atl.id)}"
+                        key="1"
+                        style={{
+                          border: "none",
+                          background: "none",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <Close htmlColor="red" />
+                      </button>,
+                    ],
+                  ]}
+                />
+              ))}
             </CardBody>
           </Card>
         </GridItem>
