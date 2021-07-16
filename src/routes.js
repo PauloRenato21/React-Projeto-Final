@@ -43,6 +43,7 @@ import TurmaCreate from "views/Turma/TurmaCreate";
 import TurmaPut from "views/Turma/TurmaPut";
 import CategoriaHome from "views/Categoria/Index.js";
 import CategoriaCreate from "views/Categoria/CategoriaCreate";
+import CategoriaPut from "views/Categoria/CategoriaPut";
 import ClubeHome from "views/Clube/Index.js";
 import ClubeCreate from "views/Clube/ClubeCreate";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
@@ -172,6 +173,13 @@ const dashboardRoutes = [
     name: "Categoria Cadastrar",
     icon: CategoryIcon,
     component: CategoriaCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/atualizar/categoria",
+    name: "Categoria Cadastrar",
+    component: CategoriaPut,
     layout: "/admin",
     invisible: true,
   },
