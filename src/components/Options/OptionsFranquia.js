@@ -8,7 +8,7 @@ export default function OptionsFranquia() {
     api.get("http://api.com/franquia").then((res) => {
       const dadoFranquia = res.data;
       setFranquia(dadoFranquia);
-    })
+    });
   }, []);
 
   return (
