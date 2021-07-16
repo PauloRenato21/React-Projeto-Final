@@ -9,6 +9,8 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
+import OptionsCategoria from "components/Options/OptionsCategoria";
+import OptionsFranquia from "components/Options/OptionsFranquia";
 import api from "API/Api";
 
 const styles = {
@@ -112,101 +114,103 @@ export default function TurmaCreate() {
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Cadastrar Turma</h4>
             </CardHeader>
-            {/* <form> */}
-            <CardBody>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Nome *"
-                    id="nome"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      maxLength: 50,
-                      minLength: 4,
-                      required: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Turno *"
-                    id="turno"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      maxLength: 50,
-                      required: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Horario Inicial *"
-                    id="inicial"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      type: "time",
-                      maxLength: 10,
-                      required: true,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Horario Final *"
-                    id="termino"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      type: "time",
-                      maxLength: 10,
-                      required: true,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <div className={classes.divSelect}>
-                    <label>Categoria *</label>
-                  </div>
-                  <select
-                    className={classes.select}
-                    name="categoria_id"
-                    id="categoria_id"
-                  >
-                    <option></option>
-                    <option value="4">Categoria 1</option>
-                  </select>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <div className={classes.divSelect}>
-                    <label>Franquia *</label>
-                  </div>
-                  <select
-                    className={classes.select}
-                    name="franquia_id"
-                    id="franquia_id"
-                  >
-                    <option></option>
-                    <option value="4">Franquia 1</option>
-                    <option value="3">Franquia 2</option>
-                  </select>
-                </GridItem>
-              </GridContainer>
-            </CardBody>
-            <CardFooter>
-              <button className={classes.button} onClick={() => setValueForm()}>
-                Enviar
-              </button>
-            </CardFooter>
-            {/* </form> */}
+            <form>
+              <CardBody>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <CustomInput
+                      labelText="Nome *"
+                      id="nome"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        maxLength: 50,
+                        minLength: 4,
+                        required: true,
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <CustomInput
+                      labelText="Turno *"
+                      id="turno"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        maxLength: 50,
+                        required: true,
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <CustomInput
+                      labelText="Horario Inicial *"
+                      id="inicial"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        type: "time",
+                        maxLength: 10,
+                        required: true,
+                      }}
+                    />
+                  </GridItem>
+                </GridContainer>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <CustomInput
+                      labelText="Horario Final *"
+                      id="termino"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        type: "time",
+                        maxLength: 10,
+                        required: true,
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <div className={classes.divSelect}>
+                      <label>Categoria *</label>
+                    </div>
+                    <select
+                      className={classes.select}
+                      name="categoria_id"
+                      id="categoria_id"
+                    >
+                      <option></option>
+                      <OptionsCategoria />
+                    </select>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <div className={classes.divSelect}>
+                      <label>Franquia *</label>
+                    </div>
+                    <select
+                      className={classes.select}
+                      name="franquia_id"
+                      id="franquia_id"
+                    >
+                      <option></option>
+                      <OptionsFranquia />
+                    </select>
+                  </GridItem>
+                </GridContainer>
+              </CardBody>
+              <CardFooter>
+                <button
+                  className={classes.button}
+                  onClick={() => setValueForm()}
+                >
+                  Enviar
+                </button>
+              </CardFooter>
+            </form>
           </Card>
         </GridItem>
       </GridContainer>
