@@ -37,6 +37,7 @@ import FuncionarioCreate from "views/Funcionario/FuncionarioCreate";
 import FuncionarioPut from "views/Funcionario/FuncionarioPut";
 import CargoHome from "views/Cargo/Index.js";
 import CargoCreate from "views/Cargo/CargoCreate";
+import CargoPut from "views/Cargo/CargoPut";
 import TurmaHome from "views/Turma/Index.js";
 import TurmaCreate from "views/Turma/TurmaCreate";
 import CategoriaHome from "views/Categoria/Index.js";
@@ -126,6 +127,13 @@ const dashboardRoutes = [
     name: "Dashboard Cargo",
     icon: AssignmentIndIcon,
     component: CargoCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/atualizar/cargo",
+    name: "Atualizar Cargo",
+    component: CargoPut,
     layout: "/admin",
     invisible: true,
   },
