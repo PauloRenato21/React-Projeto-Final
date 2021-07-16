@@ -40,6 +40,7 @@ import CargoCreate from "views/Cargo/CargoCreate";
 import CargoPut from "views/Cargo/CargoPut";
 import TurmaHome from "views/Turma/Index.js";
 import TurmaCreate from "views/Turma/TurmaCreate";
+import TurmaPut from "views/Turma/TurmaPut";
 import CategoriaHome from "views/Categoria/Index.js";
 import CategoriaCreate from "views/Categoria/CategoriaCreate";
 import ClubeHome from "views/Clube/Index.js";
@@ -149,6 +150,13 @@ const dashboardRoutes = [
     name: "Dashboard Turma",
     icon: SupervisedUserCircleIcon,
     component: TurmaCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/atualizar/turma",
+    name: "Atualizar Turma",
+    component: TurmaPut,
     layout: "/admin",
     invisible: true,
   },
