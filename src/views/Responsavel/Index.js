@@ -62,9 +62,9 @@ export default function Index() {
                       responsavel.telefone,
                       responsavel.email,
                       <button
-                        // onClick={() =>
-                        //   (location.href = `/admin/atualizar/atleta?${atl.id}`)
-                        // }
+                        onClick={() =>
+                          (location.href = `/admin/atualizar/responsavel?${responsavel.id}`)
+                        }
                         id={responsavel.id}
                         key="1"
                         style={{
