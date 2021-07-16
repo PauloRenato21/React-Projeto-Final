@@ -51,9 +51,9 @@ export default function Index() {
               </a>
             </CardHeader>
             <CardBody>
-              {turmas.map((turmas) => (
+              {turmas.map((turma) => (
                 <Table
-                  key={turmas.id}
+                  key={turma.id}
                   tableHeaderColor="warning"
                   tableHead={[
                     "ID",
@@ -68,18 +68,18 @@ export default function Index() {
                   ]}
                   tableData={[
                     [
-                      turmas.id,
-                      turmas.nome,
-                      turmas.turno,
-                      turmas.horario_inicial,
-                      turmas.horario_termino,
-                      turmas.fk_categoria_id,
-                      turmas.fk_franquias_id,
+                      turma.id,
+                      turma.nome,
+                      turma.turno,
+                      turma.horario_inicial,
+                      turma.horario_termino,
+                      turma.fk_categoria_id,
+                      turma.fk_franquias_id,
                       <button
-                        // onClick={() =>
-                        //   (location.href = `/admin/atualizar/atleta?${atl.id}`)
-                        // }
-                        id={turmas.id}
+                        onClick={() =>
+                          (location.href = `/admin/atualizar/turma?${turma.id}`)
+                        }
+                        id={turma.id}
                         key="1"
                         style={{
                           border: "none",
