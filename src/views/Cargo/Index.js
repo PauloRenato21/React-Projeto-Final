@@ -6,8 +6,8 @@ import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-
-// import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import Edit from "@material-ui/icons/Edit";
+import Close from "@material-ui/icons/Close";
 
 const styles = {
   buttonNewAtleta: {
@@ -42,12 +42,37 @@ export default function Index() {
             <CardBody>
               <Table
                 tableHeaderColor="warning"
-                tableHead={["ID", "Nome"]}
+                tableHead={["ID", "Nome", "Editar", "Excluir"]}
                 tableData={[
-                  ["1", "Dakota Rice"],
-                  ["2", "Minerva Hooper"],
-                  ["3", "Sage Rodriguez"],
-                  ["4", "Philip Chaney"],
+                  [
+                    "1",
+                    "Dakota Rice",
+                    <button
+                      // onClick={() =>
+                      //   (location.href = `/admin/atualizar/atleta?${atl.id}`)
+                      // }
+                      // id={atl.id}
+                      key="1"
+                      style={{
+                        border: "none",
+                        background: "none",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <Edit htmlColor="#00acc1" />
+                    </button>,
+                    <button
+                      onClick="{() => setValueId(atl.id)}"
+                      key="1"
+                      style={{
+                        border: "none",
+                        background: "none",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <Close htmlColor="red" />
+                    </button>,
+                  ],
                 ]}
               />
             </CardBody>

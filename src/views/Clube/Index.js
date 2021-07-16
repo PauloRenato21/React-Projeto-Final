@@ -6,8 +6,8 @@ import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-
-// import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import Edit from "@material-ui/icons/Edit";
+import Close from "@material-ui/icons/Close";
 
 const styles = {
   buttonNewAtleta: {
@@ -42,12 +42,38 @@ export default function Index() {
             <CardBody>
               <Table
                 tableHeaderColor="warning"
-                tableHead={["ID", "Nome", "CNPJ"]}
+                tableHead={["ID", "Nome", "CNPJ", "Editar", "Excluir"]}
                 tableData={[
-                  ["1", "Dakota Rice", "$36,738"],
-                  ["2", "Minerva Hooper", "$23,789"],
-                  ["3", "Sage Rodriguez", "$56,142"],
-                  ["4", "Philip Chaney", "$38,735"],
+                  [
+                    "1",
+                    "Dakota Rice",
+                    "$36,738",
+                    <button
+                      // onClick={() =>
+                      //   (location.href = `/admin/atualizar/atleta?${atl.id}`)
+                      // }
+                      // id={atl.id}
+                      key="1"
+                      style={{
+                        border: "none",
+                        background: "none",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <Edit htmlColor="#00acc1" />
+                    </button>,
+                    <button
+                      onClick="{() => setValueId(atl.id)}"
+                      key="1"
+                      style={{
+                        border: "none",
+                        background: "none",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <Close htmlColor="red" />
+                    </button>,
+                  ],
                 ]}
               />
             </CardBody>
