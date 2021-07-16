@@ -9,6 +9,7 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
+import OptionsClube from "components/Options/OptionsClube";
 import api from "API/Api";
 
 const styles = {
@@ -153,7 +154,7 @@ export default function FranquiaCreate() {
                       inputProps={{
                         maxLength: 18,
                         minLength: 18,
-                        placeholder: "00.000.000/0000.00",
+                        placeholder: "00.000.000/0000-00",
                         pattern: "[0-9]{2}.[0-9]{3}.[0-9]{3}/[0-9]{4}-[0-9]{2}",
                         required: true,
                       }}
@@ -286,14 +287,14 @@ export default function FranquiaCreate() {
                       id="clube_id"
                     >
                       <option></option>
-                      <option value="3">Clube Futebol 1</option>
-                      <option value="4">Clube Futebol 2</option>
+                      <OptionsClube />
                     </select>
                   </GridItem>
                 </GridContainer>
               </CardBody>
               <CardFooter>
                 <button
+                  type="submit"
                   className={classes.button}
                   onClick={() => setValueForm()}
                 >
