@@ -9,6 +9,8 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
+import OptionsFranquia from "components/Options/OptionsFranquia";
+import OptionsCargo from "components/Options/OptionsCargo";
 import api from "API/Api";
 
 const styles = {
@@ -284,7 +286,7 @@ export default function FuncionarioCreate() {
                       id="franquia_id"
                     >
                       <option></option>
-                      <option value="4">Franquia 1</option>
+                      <OptionsFranquia />
                     </select>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
@@ -297,8 +299,7 @@ export default function FuncionarioCreate() {
                       id="cargo_id"
                     >
                       <option></option>
-                      <option value="11">Cargo 1</option>
-                      <option value="13">Cargo 2</option>
+                      <OptionsCargo />
                     </select>
                   </GridItem>
                 </GridContainer>
