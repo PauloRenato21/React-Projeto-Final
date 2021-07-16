@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
+// import CustomInput from "components/CustomInput/CustomInput.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
@@ -59,33 +59,64 @@ const styles = {
     border: "1px solid #8e24aa",
     cursor: "pointer",
   },
+  label: {
+    display: "block",
+    marginTop: "24px",
+    font: "inherit",
+  },
+  input: {
+    border: "none",
+    borderBottom: "1px solid #d2d2d2",
+    width: "320px",
+    padding: "5px 0px",
+    fontSize: "1rem",
+  },
 };
 
 const useStyles = makeStyles(styles);
 
-export default function CategoriaCreate() {
+export default function CategoriaPut() {
   const classes = useStyles();
 
+  const [categoriaDados, setCategoriaados] = useState({
+    id: "",
+    nome: "",
+  });
+
+  const [categoria, setCategoria] = useState({
+    nome: "",
+  });
+
   useEffect(() => {
-    console.log(categoria);
+    if (location.search.slice(1)) {
+      let id = location.search.slice(1);
+      api.get(`${baseUrl}categoria/${id}`).then((res) => {
+        const dadosCategoria = res.data;
+        dadosCategoria.map((categoria) =>
+          setCategoriaados({
+            id: categoria.id,
+            nome: categoria.nome,
+          })
+        );
+      });
+    }
+  }, []);
+
+  useEffect(() => {
     if (categoria.nome) {
       setDb();
     }
   });
-
-  const [categoria, setCategoria] = useState({ nome: "" });
 
   const setValueForm = () => {
     let nomeCategoria = document.getElementById("nome").value;
     setCategoria({
       nome: nomeCategoria,
     });
-
-    document.getElementById("nome").value = "";
   };
 
   const setDb = () => {
-    api.post(`${baseUrl}categoria`, categoria);
+    api.put(`${baseUrl}categoria/${categoriaDados.id}`, categoria);
   };
 
   return (
@@ -94,31 +125,34 @@ export default function CategoriaCreate() {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Cadastrar Categoria</h4>
+              <h4 className={classes.cardTitleWhite}>Editar Categoria</h4>
             </CardHeader>
-            <CardBody>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <CustomInput
-                    labelText="Nome *"
-                    id="nome"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      maxLength: 100,
-                      minLength: 4,
-                      required: true,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-            </CardBody>
-            <CardFooter>
-              <button className={classes.button} onClick={() => setValueForm()}>
-                Enviar
-              </button>
-            </CardFooter>
+            <form>
+              <CardBody>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <label className={classes.label}>Nome *</label>
+                    <input
+                      className={classes.input}
+                      type="text"
+                      required
+                      maxLength="50"
+                      minLength="4"
+                      id="nome"
+                      defaultValue={categoriaDados.nome}
+                    />
+                  </GridItem>
+                </GridContainer>
+              </CardBody>
+              <CardFooter>
+                <button
+                  className={classes.button}
+                  onClick={() => setValueForm()}
+                >
+                  Enviar
+                </button>
+              </CardFooter>
+            </form>
           </Card>
         </GridItem>
       </GridContainer>

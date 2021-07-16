@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -6,8 +6,10 @@ import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-
-// import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import Edit from "@material-ui/icons/Edit";
+import Close from "@material-ui/icons/Close";
+import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   buttonNewAtleta: {
@@ -28,6 +30,16 @@ const useStyles = makeStyles(styles);
 
 export default function Index() {
   const classes = useStyles();
+
+  const [clubes, setClube] = useState([]);
+
+  useEffect(() => {
+    api.get(`${baseUrl}clube`).then((res) => {
+      const dadosClube = res.data;
+      setClube(dadosClube);
+    });
+  }, []);
+
   return (
     <div>
       <GridContainer>
@@ -40,16 +52,45 @@ export default function Index() {
               </a>
             </CardHeader>
             <CardBody>
-              <Table
-                tableHeaderColor="warning"
-                tableHead={["ID", "Nome", "CNPJ"]}
-                tableData={[
-                  ["1", "Dakota Rice", "$36,738"],
-                  ["2", "Minerva Hooper", "$23,789"],
-                  ["3", "Sage Rodriguez", "$56,142"],
-                  ["4", "Philip Chaney", "$38,735"],
-                ]}
-              />
+              {clubes.map((clube) => (
+                <Table
+                  key={clube.id}
+                  tableHeaderColor="warning"
+                  tableHead={["ID", "Nome", "CNPJ", "Editar", "Excluir"]}
+                  tableData={[
+                    [
+                      clube.id,
+                      clube.nome,
+                      clube.cnpj,
+                      <button
+                        onClick={() =>
+                          (location.href = `/admin/atualizar/clube?${clube.id}`)
+                        }
+                        id={clube.id}
+                        key="1"
+                        style={{
+                          border: "none",
+                          background: "none",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <Edit htmlColor="#00acc1" />
+                      </button>,
+                      <button
+                        onClick="{() => setValueId(atl.id)}"
+                        key="1"
+                        style={{
+                          border: "none",
+                          background: "none",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <Close htmlColor="red" />
+                      </button>,
+                    ],
+                  ]}
+                />
+              ))}
             </CardBody>
           </Card>
         </GridItem>

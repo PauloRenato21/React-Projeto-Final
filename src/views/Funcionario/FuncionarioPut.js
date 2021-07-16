@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
+// import CustomInput from "components/CustomInput/CustomInput.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
@@ -61,33 +61,85 @@ const styles = {
     border: "1px solid #8e24aa",
     cursor: "pointer",
   },
+  label: {
+    display: "block",
+    marginTop: "24px",
+    font: "inherit",
+  },
+  input: {
+    border: "none",
+    borderBottom: "1px solid #d2d2d2",
+    width: "320px",
+    padding: "5px 0px",
+    fontSize: "1rem",
+  },
 };
 
 const useStyles = makeStyles(styles);
 
-export default function FuncionarioCreate() {
+export default function FuncionarioPut() {
   const classes = useStyles();
 
-  useEffect(() => {
-    console.log(funcionario);
-    if (funcionario.nome) {
-      setDb();
-    }
+  const [funcionarioDados, setFuncionarioDados] = useState({
+    id: "",
+    nome: "",
+    cpf: "",
+    rg: "",
+    endereco_rua: "",
+    endereco_bairro: "",
+    endereco_numero: "",
+    naturalidade: "",
+    telefone: "",
+    email: "",
+    dt_nascimento: "",
+    fk_franquias_id: "",
+    fk_cargo_id: "",
   });
-
   const [funcionario, setFuncionario] = useState({
     nome: "",
     cpf: "",
     rg: "",
     endereco_rua: "",
-    endereco_numero: "",
     endereco_bairro: "",
+    endereco_numero: "",
     naturalidade: "",
-    email: "",
     telefone: "",
+    email: "",
     dt_nascimento: "",
     fk_franquias_id: "",
     fk_cargo_id: "",
+  });
+
+  useEffect(() => {
+    if (location.search.slice(1)) {
+      let id = location.search.slice(1);
+      api.get(`${baseUrl}funcionario/${id}`).then((res) => {
+        const dadosFuncionario = res.data;
+        dadosFuncionario.map((func) =>
+          setFuncionarioDados({
+            id: func.id,
+            nome: func.nome,
+            cpf: func.cpf,
+            rg: func.rg,
+            endereco_rua: func.endereco_rua,
+            endereco_bairro: func.endereco_bairro,
+            endereco_numero: func.endereco_numero,
+            naturalidade: func.naturalidade,
+            telefone: func.telefone,
+            email: func.email,
+            dt_nascimento: func.dt_nascimento,
+            fk_franquias_id: func.fk_franquias_id,
+            fk_cargo_id: func.fk_cargo_id,
+          })
+        );
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (funcionario.nome) {
+      setDb();
+    }
   });
 
   const setValueForm = () => {
@@ -98,31 +150,31 @@ export default function FuncionarioCreate() {
     let numeroFuncionario = document.getElementById("numero").value;
     let bairroFuncionario = document.getElementById("bairro").value;
     let naturalidadeFuncionario = document.getElementById("naturalidade").value;
-    let emailFuncionario = document.getElementById("email").value;
     let telefoneFuncionario = document.getElementById("telefone").value;
+    let emailFuncionario = document.getElementById("email").value;
     let dtNascimentoFuncionario = document.getElementById("dtNascimento").value;
     let fkFranquia = document.getElementById("franquia_id");
     let fkCargo = document.getElementById("cargo_id");
-    let valueFkFraquia = fkFranquia.options[fkFranquia.selectedIndex].value;
+    let valueFkFranquia = fkFranquia.options[fkFranquia.selectedIndex].value;
     let valueFkCargo = fkCargo.options[fkCargo.selectedIndex].value;
     setFuncionario({
       nome: nomeFuncionario,
       cpf: cpfFuncionario,
       rg: rgFuncionario,
       endereco_rua: ruaFuncionario,
-      endereco_numero: numeroFuncionario,
       endereco_bairro: bairroFuncionario,
+      endereco_numero: numeroFuncionario,
       naturalidade: naturalidadeFuncionario,
-      email: emailFuncionario,
       telefone: telefoneFuncionario,
+      email: emailFuncionario,
       dt_nascimento: dtNascimentoFuncionario,
-      fk_franquias_id: valueFkFraquia,
+      fk_franquias_id: valueFkFranquia,
       fk_cargo_id: valueFkCargo,
     });
   };
 
   const setDb = () => {
-    api.post(`${baseUrl}funcionario`, funcionario);
+    api.put(`${baseUrl}funcionario/${funcionarioDados.id}`, funcionario);
   };
 
   return (
@@ -131,138 +183,115 @@ export default function FuncionarioCreate() {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Cadastrar Funcionário</h4>
+              <h4 className={classes.cardTitleWhite}>Editar Funcionário</h4>
             </CardHeader>
             <form>
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="Nome *"
+                    <label className={classes.label}>Nome *</label>
+                    <input
+                      className={classes.input}
+                      type="text"
+                      required
+                      maxLength="100"
+                      minLength="4"
                       id="nome"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        maxLength: 45,
-                        minLength: 4,
-                        required: true,
-                      }}
+                      defaultValue={funcionarioDados.nome}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="CPF *"
+                    <label className={classes.label}>CPF *</label>
+                    <input
+                      className={classes.input}
                       id="cpf"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        maxLength: 14,
-                        minLength: 14,
-                        placeholder: "000.000.000-00",
-                        pattern: "[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}",
-                        required: true,
-                      }}
+                      maxLength="14"
+                      minLength="14"
+                      placeholder="000.000.000-00"
+                      required
+                      pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
+                      defaultValue={funcionarioDados.cpf}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="RG *"
+                    <label className={classes.label}>RG *</label>
+                    <input
+                      className={classes.input}
                       id="rg"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        maxLength: 10,
-                        required: true,
-                      }}
+                      maxLength="10"
+                      required
+                      defaultValue={funcionarioDados.rg}
                     />
                   </GridItem>
                 </GridContainer>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="Endereço Rua *"
+                    <label className={classes.label}>Endereço Rua *</label>
+                    <input
+                      className={classes.input}
                       id="rua"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        maxLength: 45,
-                        required: true,
-                      }}
+                      maxLength="50"
+                      required
+                      defaultValue={funcionarioDados.endereco_rua}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="Endereço Nº *"
+                    <label className={classes.label}>Endereço Nº *</label>
+                    <input
+                      className={classes.input}
                       id="numero"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        maxLength: 5,
-                        required: true,
-                      }}
+                      maxLength="5"
+                      required
+                      defaultValue={funcionarioDados.endereco_numero}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="Endereço Bairro *"
+                    <label className={classes.label}>Endereço Bairro *</label>
+                    <input
+                      className={classes.input}
                       id="bairro"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        maxLength: 45,
-                        minLength: 3,
-                        required: true,
-                      }}
+                      maxLength="50"
+                      minLength="3"
+                      required
+                      defaultValue={funcionarioDados.endereco_bairro}
                     />
                   </GridItem>
                 </GridContainer>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="Naturalidade (País) *"
+                    <label className={classes.label}>
+                      Naturalidade (País) *
+                    </label>
+                    <input
+                      className={classes.input}
                       id="naturalidade"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        maxLength: 50,
-                        required: true,
-                      }}
+                      maxLength="50"
+                      required
+                      defaultValue={funcionarioDados.naturalidade}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="Telefone *"
+                    <label className={classes.label}>Telefone *</label>
+                    <input
+                      className={classes.input}
                       id="telefone"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        maxLength: 50,
-                        minLength: 7,
-                        placeholder: "(xx) xxxxx-xxxx",
-                        required: true,
-                      }}
+                      maxLength="13"
+                      minLength="7"
+                      placeholder="(xx) xxxxx-xxxx"
+                      required
+                      defaultValue={funcionarioDados.telefone}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="Email *"
+                    <label className={classes.label}>Email *</label>
+                    <input
+                      className={classes.input}
+                      type="email"
                       id="email"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        maxLength: 100,
-                        placeholder: "@gmail.com",
-                        required: true,
-                      }}
+                      maxLength="100"
+                      placeholder="@gmail.com"
+                      required
+                      defaultValue={funcionarioDados.email}
                     />
                   </GridItem>
                 </GridContainer>
@@ -275,20 +304,8 @@ export default function FuncionarioCreate() {
                       className={classes.inputNascimento}
                       type="date"
                       id="dtNascimento"
+                      defaultValue={funcionarioDados.dt_nascimento}
                     />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <div className={classes.divSelect}>
-                      <label>Franquia *</label>
-                    </div>
-                    <select
-                      className={classes.select}
-                      name="franquia_id"
-                      id="franquia_id"
-                    >
-                      <option></option>
-                      <OptionsFranquia />
-                    </select>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
                     <div className={classes.divSelect}>
@@ -299,8 +316,25 @@ export default function FuncionarioCreate() {
                       name="cargo_id"
                       id="cargo_id"
                     >
-                      <option></option>
+                      <option value={funcionarioDados.fk_cargo_id}>
+                        Cargo {funcionarioDados.fk_cargo_id}
+                      </option>
                       <OptionsCargo />
+                    </select>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <div className={classes.divSelect}>
+                      <label>Franquia *</label>
+                    </div>
+                    <select
+                      className={classes.select}
+                      name="franquia_id"
+                      id="franquia_id"
+                    >
+                      <option value={funcionarioDados.fk_franquias_id}>
+                        Franquia {funcionarioDados.fk_franquias_id}
+                      </option>
+                      <OptionsFranquia />
                     </select>
                   </GridItem>
                 </GridContainer>

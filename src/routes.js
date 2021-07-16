@@ -18,23 +18,6 @@
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
-<<<<<<< HEAD
-import LibraryBooks from "@material-ui/icons/LibraryBooks";
-import BubbleChart from "@material-ui/icons/BubbleChart";
-import LocationOn from "@material-ui/icons/LocationOn";
-import Notifications from "@material-ui/icons/Notifications";
-import Unarchive from "@material-ui/icons/Unarchive";
-// import Language from "@material-ui/icons/Language";
-// core components/views for Admin layout
-import DashboardPage from "views/Dashboard/Dashboard.js";
-import UserProfile from "views/UserProfile/UserProfile.js";
-import TableList from "views/TableList/TableList.js";
-import Typography from "views/Typography/Typography.js";
-import Icons from "views/Icons/Icons.js";
-import Maps from "views/Maps/Maps.js";
-import NotificationsPage from "views/Notifications/Notifications.js";
-import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
-=======
 import PeopleIcon from "@material-ui/icons/People";
 import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
 import CategoryIcon from "@material-ui/icons/Category";
@@ -45,83 +28,35 @@ import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 // core components/views for Admin layout
 import Home from "views/Home/Home";
 import AtletaHome from "views/Atleta/Index.js";
-import AtletaCreate from "views/Atleta/AtletaCreate";
+import AtletaPut from "views/Atleta/AtletaPut";
 import ResponsavelHome from "views/Responsavel/Index.js";
+import ResponsavelPut from "views/Responsavel/ResponsavelPut";
 import FuncionarioHome from "views/Funcionario/Index.js";
 import FuncionarioCreate from "views/Funcionario/FuncionarioCreate";
+import FuncionarioPut from "views/Funcionario/FuncionarioPut";
 import CargoHome from "views/Cargo/Index.js";
 import CargoCreate from "views/Cargo/CargoCreate";
+import CargoPut from "views/Cargo/CargoPut";
 import TurmaHome from "views/Turma/Index.js";
 import TurmaCreate from "views/Turma/TurmaCreate";
+import TurmaPut from "views/Turma/TurmaPut";
 import CategoriaHome from "views/Categoria/Index.js";
 import CategoriaCreate from "views/Categoria/CategoriaCreate";
+import CategoriaPut from "views/Categoria/CategoriaPut";
 import ClubeHome from "views/Clube/Index.js";
 import ClubeCreate from "views/Clube/ClubeCreate";
+import ClubePut from "views/Clube/ClubePut";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
 import FranquiaHome from "views/Franquia/Index";
 import FranquiaCreate from "views/Franquia/FranquiaCreate";
->>>>>>> 3be954db4e5cb61898cbe85317e10b8ad00f9494
+import FranquiaPut from "views/Franquia/FranquiaPut";
+
 // core components/views for RTL layout
 // import RTLPage from "views/RTLPage/RTLPage.js";
 
 const dashboardRoutes = [
   {
     path: "/dashboard",
-<<<<<<< HEAD
-    name: "Dashboard",
-    rtlName: "لوحة القيادة",
-    icon: Dashboard,
-    component: DashboardPage,
-    layout: "/admin",
-  },
-  {
-    path: "/user",
-    name: "User Profile",
-    rtlName: "ملف تعريفي للمستخدم",
-    icon: Person,
-    component: UserProfile,
-    layout: "/admin",
-  },
-  {
-    path: "/table",
-    name: "Table List",
-    rtlName: "قائمة الجدول",
-    icon: "content_paste",
-    component: TableList,
-    layout: "/admin",
-  },
-  {
-    path: "/typography",
-    name: "Typography",
-    rtlName: "طباعة",
-    icon: LibraryBooks,
-    component: Typography,
-    layout: "/admin",
-  },
-  {
-    path: "/icons",
-    name: "Icons",
-    rtlName: "الرموز",
-    icon: BubbleChart,
-    component: Icons,
-    layout: "/admin",
-  },
-  {
-    path: "/maps",
-    name: "Maps",
-    rtlName: "خرائط",
-    icon: LocationOn,
-    component: Maps,
-    layout: "/admin",
-  },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    rtlName: "إخطارات",
-    icon: Notifications,
-    component: NotificationsPage,
-    layout: "/admin",
-=======
     name: "Home Administrador",
     icon: Dashboard,
     component: Home,
@@ -136,9 +71,9 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/cadastrar/atleta",
-    name: "Atleta Cadastrar",
-    component: AtletaCreate,
+    path: "/atualizar/atleta",
+    name: "Atualizar Atleta",
+    component: AtletaPut,
     layout: "/admin",
     invisible: true,
   },
@@ -148,6 +83,13 @@ const dashboardRoutes = [
     icon: PeopleIcon,
     component: ResponsavelHome,
     layout: "/admin",
+  },
+  {
+    path: "/atualizar/responsavel",
+    name: "Atualizar Responsável",
+    component: ResponsavelPut,
+    layout: "/admin",
+    invisible: true,
   },
   {
     path: "/funcionario",
@@ -160,6 +102,13 @@ const dashboardRoutes = [
     path: "/cadastrar/funcionario",
     name: "Funcionário Cadastrar",
     component: FuncionarioCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/atualizar/funcionario",
+    name: "Atualizar Funcionário",
+    component: FuncionarioPut,
     layout: "/admin",
     invisible: true,
   },
@@ -179,6 +128,13 @@ const dashboardRoutes = [
     invisible: true,
   },
   {
+    path: "/atualizar/cargo",
+    name: "Atualizar Cargo",
+    component: CargoPut,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
     path: "/turma",
     name: "Dashboard Turma",
     icon: SupervisedUserCircleIcon,
@@ -190,6 +146,13 @@ const dashboardRoutes = [
     name: "Dashboard Turma",
     icon: SupervisedUserCircleIcon,
     component: TurmaCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/atualizar/turma",
+    name: "Atualizar Turma",
+    component: TurmaPut,
     layout: "/admin",
     invisible: true,
   },
@@ -209,6 +172,13 @@ const dashboardRoutes = [
     invisible: true,
   },
   {
+    path: "/atualizar/categoria",
+    name: "Categoria Cadastrar",
+    component: CategoriaPut,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
     path: "/clube",
     name: "Dashboard Clube Futebol",
     icon: SportsSoccerIcon,
@@ -217,9 +187,16 @@ const dashboardRoutes = [
   },
   {
     path: "/cadastrar/clube",
-    name: "Dashboard Clube Futebol",
+    name: "Cadastrar Clube Futebol",
     icon: SportsSoccerIcon,
     component: ClubeCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/atualizar/clube",
+    name: "Atualizar Clube Futebol",
+    component: ClubePut,
     layout: "/admin",
     invisible: true,
   },
@@ -237,7 +214,13 @@ const dashboardRoutes = [
     component: FranquiaCreate,
     layout: "/admin",
     invisible: true,
->>>>>>> 3be954db4e5cb61898cbe85317e10b8ad00f9494
+  },
+  {
+    path: "/atualizar/franquia",
+    name: "Atualizar Franquia",
+    component: FranquiaPut,
+    layout: "/admin",
+    invisible: true,
   },
   // {
   //   path: "/rtl-page",
@@ -250,10 +233,6 @@ const dashboardRoutes = [
   {
     path: "/upgrade-to-pro",
     name: "Upgrade To PRO",
-<<<<<<< HEAD
-    rtlName: "التطور للاحترافية",
-=======
->>>>>>> 3be954db4e5cb61898cbe85317e10b8ad00f9494
     icon: Unarchive,
     component: UpgradeToPro,
     layout: "/admin",

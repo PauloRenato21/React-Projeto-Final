@@ -4,10 +4,13 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
+// import CustomInput from "components/CustomInput/CustomInput.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
+import OptionsCategoria from "components/Options/OptionsCategoria";
+import OptionsFranquia from "components/Options/OptionsFranquia";
 import api from "API/Api";
 import baseUrl from "API/Url";
 
@@ -74,79 +77,74 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function ResponsavelPut() {
+export default function TurmaPut() {
   const classes = useStyles();
 
-  const [responsavelDados, setResponsavelDados] = useState({
+  const [turmaDados, setTurmaDados] = useState({
     id: "",
     nome: "",
-    cpf: "",
-    grau_parentesco: "",
-    profissao: "",
-    local_trabalho: "",
-    telefone: "",
-    email: "",
+    turno: "",
+    horario_inicial: "",
+    horario_termino: "",
+    fk_categoria_id: "",
+    fk_franquias_id: "",
   });
-
-  const [responsavel, setResponsavel] = useState({
+  const [turma, setTurma] = useState({
     nome: "",
-    cpf: "",
-    grau_parentesco: "",
-    profissao: "",
-    local_trabalho: "",
-    telefone: "",
-    email: "",
-  });
-
-  useEffect(() => {
-    console.log(responsavel);
-    if (responsavel.nome) {
-      setDb();
-    }
+    turno: "",
+    horario_inicial: "",
+    horario_termino: "",
+    fk_categoria_id: "",
+    fk_franquias_id: "",
   });
 
   useEffect(() => {
     if (location.search.slice(1)) {
       let id = location.search.slice(1);
-      api.get(`${baseUrl}responsavel/${id}`).then((res) => {
-        const dadoResp = res.data;
-        dadoResp.map((count) =>
-          setResponsavelDados({
-            id: count.id,
-            nome: count.nome,
-            cpf: count.cpf,
-            grau_parentesco: count.grau_parentesco,
-            profissao: count.profissao,
-            local_trabalho: count.local_trabalho,
-            telefone: count.telefone,
-            email: count.email,
+      api.get(`${baseUrl}turma/${id}`).then((res) => {
+        const dadoTurma = res.data;
+        dadoTurma.map((turma) =>
+          setTurmaDados({
+            id: turma.id,
+            nome: turma.nome,
+            turno: turma.turno,
+            horario_inicial: turma.horario_inicial,
+            horario_termino: turma.horario_termino,
+            fk_categoria_id: turma.fk_categoria_id,
+            fk_franquias_id: turma.fk_franquias_id,
           })
         );
       });
     }
   }, []);
 
+  useEffect(() => {
+    if (turma.nome) {
+      setDb();
+    }
+  });
+
   const setValueForm = () => {
-    let nomeResp = document.getElementById("nome").value;
-    let cpfResp = document.getElementById("cpf").value;
-    let parentescoResp = document.getElementById("parentesco").value;
-    let trabalhoResp = document.getElementById("trabalho").value;
-    let profissaoResp = document.getElementById("profissao").value;
-    let telefoneResp = document.getElementById("telefone").value;
-    let emailResp = document.getElementById("email").value;
-    setResponsavel({
-      nome: nomeResp,
-      cpf: cpfResp,
-      grau_parentesco: parentescoResp,
-      local_trabalho: trabalhoResp,
-      profissao: profissaoResp,
-      telefone: telefoneResp,
-      email: emailResp,
+    let nomeTurma = document.getElementById("nome").value;
+    let turnoTurma = document.getElementById("turno").value;
+    let horarioInicialTurma = document.getElementById("inicial").value;
+    let horarioTerminoTurma = document.getElementById("termino").value;
+    let fkCategoria = document.getElementById("categoria_id");
+    let fkFranquia = document.getElementById("franquia_id");
+    let valueFkCategoria = fkCategoria.options[fkCategoria.selectedIndex].value;
+    let valueFkFranquia = fkFranquia.options[fkFranquia.selectedIndex].value;
+    setTurma({
+      nome: nomeTurma,
+      turno: turnoTurma,
+      horario_inicial: horarioInicialTurma,
+      horario_termino: horarioTerminoTurma,
+      fk_categoria_id: valueFkCategoria,
+      fk_franquias_id: valueFkFranquia,
     });
   };
 
   const setDb = () => {
-    api.put(`${baseUrl}responsavel/${responsavelDados.id}`, responsavel);
+    api.put(`${baseUrl}turma/${turmaDados.id}`, turma);
   };
 
   return (
@@ -155,7 +153,7 @@ export default function ResponsavelPut() {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Atualizar Responsável</h4>
+              <h4 className={classes.cardTitleWhite}>Editar Turma</h4>
             </CardHeader>
             <form>
               <CardBody>
@@ -164,79 +162,77 @@ export default function ResponsavelPut() {
                     <label className={classes.label}>Nome *</label>
                     <input
                       className={classes.input}
-                      id="nome"
-                      maxLength="100"
+                      type="text"
+                      required
+                      maxLength="50"
                       minLength="4"
-                      required
-                      defaultValue={responsavelDados.nome}
+                      id="nome"
+                      defaultValue={turmaDados.nome}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
-                    <label className={classes.label}>CPF *</label>
+                    <label className={classes.label}>Turno *</label>
                     <input
                       className={classes.input}
-                      id="cpf"
-                      maxLength="14"
-                      minLength="14"
-                      placeholder="000.000.000-00"
-                      pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
+                      id="turno"
+                      maxLength="50"
                       required
-                      defaultValue={responsavelDados.cpf}
+                      defaultValue={turmaDados.turno}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
-                    <label className={classes.label}>Grau Parentesco *</label>
+                    <label className={classes.label}>Horario Inicial *</label>
                     <input
                       className={classes.input}
-                      id="parentesco"
-                      maxLength="100"
+                      id="inicial"
+                      type="time"
                       required
-                      defaultValue={responsavelDados.grau_parentesco}
+                      defaultValue={turmaDados.horario_inicial}
                     />
                   </GridItem>
                 </GridContainer>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
-                    <label className={classes.label}>Profissão *</label>
+                    <label className={classes.label}>
+                      Horario de Termino *
+                    </label>
                     <input
                       className={classes.input}
-                      id="profissao"
-                      maxLength="50"
+                      id="termino"
+                      type="time"
                       required
-                      defaultValue={responsavelDados.profissao}
+                      defaultValue={turmaDados.horario_termino}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
-                    <label className={classes.label}>Local de Trabalho *</label>
-                    <input
-                      className={classes.input}
-                      id="trabalho"
-                      maxLength="100"
-                      required
-                      defaultValue={responsavelDados.local_trabalho}
-                    />
+                    <div className={classes.divSelect}>
+                      <label>Categoria *</label>
+                    </div>
+                    <select
+                      className={classes.select}
+                      name="categoria_id"
+                      id="categoria_id"
+                    >
+                      <option value={turmaDados.fk_categoria_id}>
+                        Categoria {turmaDados.fk_categoria_id}
+                      </option>
+                      <OptionsCategoria />
+                    </select>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
-                    <label className={classes.label}>Telefone *</label>
-                    <input
-                      className={classes.input}
-                      id="telefone"
-                      maxLength="50"
-                      required
-                      defaultValue={responsavelDados.telefone}
-                    />
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <label className={classes.label}>Email *</label>
-                    <input
-                      className={classes.input}
-                      id="email"
-                      maxLength="100"
-                      required
-                      defaultValue={responsavelDados.email}
-                    />
+                    <div className={classes.divSelect}>
+                      <label>Franquia *</label>
+                    </div>
+                    <select
+                      className={classes.select}
+                      name="franquia_id"
+                      id="franquia_id"
+                    >
+                      <option value={turmaDados.fk_franquias_id}>
+                        Franquia {turmaDados.fk_franquias_id}
+                      </option>
+                      <OptionsFranquia />
+                    </select>
                   </GridItem>
                 </GridContainer>
               </CardBody>

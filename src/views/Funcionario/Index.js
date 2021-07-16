@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -6,8 +6,10 @@ import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-
-// import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import Edit from "@material-ui/icons/Edit";
+import Close from "@material-ui/icons/Close";
+import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   buttonNewAtleta: {
@@ -28,6 +30,16 @@ const useStyles = makeStyles(styles);
 
 export default function Index() {
   const classes = useStyles();
+
+  const [funcionarios, setFuncionario] = useState([]);
+
+  useEffect(() => {
+    api.get(`${baseUrl}funcionario`).then((res) => {
+      const dadosFuncionarios = res.data;
+      setFuncionario(dadosFuncionarios);
+    });
+  }, []);
+
   return (
     <div>
       <GridContainer>
@@ -40,39 +52,67 @@ export default function Index() {
               </a>
             </CardHeader>
             <CardBody>
-              <Table
-                tableHeaderColor="warning"
-                tableHead={[
-                  "ID",
-                  "Nome",
-                  "CPF",
-                  "RG",
-                  "Data Nascimento",
-                  "Endereço",
-                  "Naturalidade",
-                  "Telefone",
-                  "Email",
-                  "Cargo",
-                  "Franquia",
-                ]}
-                tableData={[
-                  [
-                    "1",
-                    "Dakota Rice",
-                    "$36,738",
-                    "Niger",
-                    "Rua Teste A",
-                    "Brasileiro",
-                    "99999999999",
-                    "teste@gmail.com",
-                    "Turma Teste 01",
-                    "Responsavel Teste",
-                  ],
-                  ["2", "Minerva Hooper", "$23,789", "Curaçao"],
-                  ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
-                  ["4", "Philip Chaney", "$38,735", "Korea, South"],
-                ]}
-              />
+              {funcionarios.map((funcionario) => (
+                <Table
+                  key={funcionario.id}
+                  tableHeaderColor="warning"
+                  tableHead={[
+                    "ID",
+                    "Nome",
+                    "CPF",
+                    "RG",
+                    "Data Nascimento",
+                    "Endereço",
+                    "Naturalidade",
+                    "Telefone",
+                    "Email",
+                    "Cargo",
+                    "Franquia",
+                    "Editar",
+                    "Excluir",
+                  ]}
+                  tableData={[
+                    [
+                      funcionario.id,
+                      funcionario.nome,
+                      funcionario.cpf,
+                      funcionario.rg,
+                      funcionario.dt_nascimento,
+                      funcionario.endereco_bairro,
+                      funcionario.naturalidade,
+                      funcionario.telefone,
+                      funcionario.email,
+                      funcionario.fk_cargo_id,
+                      funcionario.fk_franquias_id,
+                      <button
+                        onClick={() =>
+                          (location.href = `/admin/atualizar/funcionario?${funcionario.id}`)
+                        }
+                        id={funcionario.id}
+                        key="1"
+                        style={{
+                          border: "none",
+                          background: "none",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <Edit htmlColor="#00acc1" />
+                      </button>,
+                      <button
+                        onClick="{() => setValueId(atl.id)}"
+                        key="1"
+                        style={{
+                          border: "none",
+                          background: "none",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <Close htmlColor="red" />
+                      </button>,
+                    ],
+                  ]}
+                />
+              ))}
             </CardBody>
           </Card>
         </GridItem>
