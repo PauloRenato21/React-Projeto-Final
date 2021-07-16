@@ -34,6 +34,7 @@ import ResponsavelHome from "views/Responsavel/Index.js";
 import ResponsavelPut from "views/Responsavel/ResponsavelPut";
 import FuncionarioHome from "views/Funcionario/Index.js";
 import FuncionarioCreate from "views/Funcionario/FuncionarioCreate";
+import FuncionarioPut from "views/Funcionario/FuncionarioPut";
 import CargoHome from "views/Cargo/Index.js";
 import CargoCreate from "views/Cargo/CargoCreate";
 import TurmaHome from "views/Turma/Index.js";
@@ -103,6 +104,13 @@ const dashboardRoutes = [
     path: "/cadastrar/funcionario",
     name: "Funcionário Cadastrar",
     component: FuncionarioCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/atualizar/funcionario",
+    name: "Atualizar Funcionário",
+    component: FuncionarioPut,
     layout: "/admin",
     invisible: true,
   },
