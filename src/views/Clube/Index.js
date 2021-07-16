@@ -62,9 +62,9 @@ export default function Index() {
                       clube.nome,
                       clube.cnpj,
                       <button
-                        // onClick={() =>
-                        //   (location.href = `/admin/atualizar/atleta?${atl.id}`)
-                        // }
+                        onClick={() =>
+                          (location.href = `/admin/atualizar/clube?${clube.id}`)
+                        }
                         id={clube.id}
                         key="1"
                         style={{
