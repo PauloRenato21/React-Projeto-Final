@@ -50,6 +50,7 @@ import ClubePut from "views/Clube/ClubePut";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
 import FranquiaHome from "views/Franquia/Index";
 import FranquiaCreate from "views/Franquia/FranquiaCreate";
+import FranquiaPut from "views/Franquia/FranquiaPut";
 // core components/views for RTL layout
 // import RTLPage from "views/RTLPage/RTLPage.js";
 
@@ -218,6 +219,13 @@ const dashboardRoutes = [
     name: "Dashboard Franquia",
     icon: BusinessIcon,
     component: FranquiaCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/atualizar/franquia",
+    name: "Atualizar Franquia",
+    component: FranquiaPut,
     layout: "/admin",
     invisible: true,
   },
