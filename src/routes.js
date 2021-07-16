@@ -29,6 +29,7 @@ import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import Home from "views/Home/Home";
 import AtletaHome from "views/Atleta/Index.js";
 import AtletaCreate from "views/Atleta/AtletaCreate";
+import AtletaPut from "views/Atleta/AtletaPut";
 import ResponsavelHome from "views/Responsavel/Index.js";
 import FuncionarioHome from "views/Funcionario/Index.js";
 import FuncionarioCreate from "views/Funcionario/FuncionarioCreate";
@@ -66,6 +67,13 @@ const dashboardRoutes = [
     path: "/cadastrar/atleta",
     name: "Atleta Cadastrar",
     component: AtletaCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/atualizar/atleta",
+    name: "Atleta Atualizar",
+    component: AtletaPut,
     layout: "/admin",
     invisible: true,
   },
