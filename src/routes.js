@@ -46,6 +46,7 @@ import CategoriaCreate from "views/Categoria/CategoriaCreate";
 import CategoriaPut from "views/Categoria/CategoriaPut";
 import ClubeHome from "views/Clube/Index.js";
 import ClubeCreate from "views/Clube/ClubeCreate";
+import ClubePut from "views/Clube/ClubePut";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
 import FranquiaHome from "views/Franquia/Index";
 import FranquiaCreate from "views/Franquia/FranquiaCreate";
@@ -192,9 +193,16 @@ const dashboardRoutes = [
   },
   {
     path: "/cadastrar/clube",
-    name: "Dashboard Clube Futebol",
+    name: "Cadastrar Clube Futebol",
     icon: SportsSoccerIcon,
     component: ClubeCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/atualizar/clube",
+    name: "Atualizar Clube Futebol",
+    component: ClubePut,
     layout: "/admin",
     invisible: true,
   },
