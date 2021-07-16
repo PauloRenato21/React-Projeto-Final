@@ -80,9 +80,9 @@ export default function Index() {
                       franquia.email,
                       franquia.fk_clube_futebol_id,
                       <button
-                        // onClick={() =>
-                        //   (location.href = `/admin/atualizar/atleta?${atl.id}`)
-                        // }
+                        onClick={() =>
+                          (location.href = `/admin/atualizar/franquia?${franquia.id}`)
+                        }
                         id={franquia.id}
                         key="1"
                         style={{
