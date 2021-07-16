@@ -61,9 +61,9 @@ export default function Index() {
                       cargo.id,
                       cargo.nome,
                       <button
-                        // onClick={() =>
-                        //   (location.href = `/admin/atualizar/atleta?${atl.id}`)
-                        // }
+                        onClick={() =>
+                          (location.href = `/admin/atualizar/cargo?${cargo.id}`)
+                        }
                         id={cargo.id}
                         key="1"
                         style={{
