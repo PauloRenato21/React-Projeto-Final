@@ -61,9 +61,9 @@ export default function Index() {
                       categoria.id,
                       categoria.nome,
                       <button
-                        // onClick={() =>
-                        //   (location.href = `/admin/atualizar/atleta?${atl.id}`)
-                        // }
+                        onClick={() =>
+                          (location.href = `/admin/atualizar/categoria?${categoria.id}`)
+                        }
                         id={categoria.id}
                         key="1"
                         style={{
