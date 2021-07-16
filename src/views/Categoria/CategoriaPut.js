@@ -10,6 +10,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   cardCategoryWhite: {
@@ -89,7 +90,7 @@ export default function CategoriaPut() {
   useEffect(() => {
     if (location.search.slice(1)) {
       let id = location.search.slice(1);
-      api.get(`http://api.com/categoria/${id}`).then((res) => {
+      api.get(`${baseUrl}categoria/${id}`).then((res) => {
         const dadosCategoria = res.data;
         dadosCategoria.map((categoria) =>
           setCategoriaados({
@@ -115,7 +116,7 @@ export default function CategoriaPut() {
   };
 
   const setDb = () => {
-    api.put(`http://api.com/categoria/${categoriaDados.id}`, categoria);
+    api.put(`${baseUrl}categoria/${categoriaDados.id}`, categoria);
   };
 
   return (

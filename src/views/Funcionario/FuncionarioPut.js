@@ -12,6 +12,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import OptionsFranquia from "components/Options/OptionsFranquia";
 import OptionsCargo from "components/Options/OptionsCargo";
 import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   cardCategoryWhite: {
@@ -112,7 +113,7 @@ export default function FuncionarioPut() {
   useEffect(() => {
     if (location.search.slice(1)) {
       let id = location.search.slice(1);
-      api.get(`http://api.com/funcionario/${id}`).then((res) => {
+      api.get(`${baseUrl}funcionario/${id}`).then((res) => {
         const dadosFuncionario = res.data;
         dadosFuncionario.map((func) =>
           setFuncionarioDados({
@@ -173,7 +174,7 @@ export default function FuncionarioPut() {
   };
 
   const setDb = () => {
-    api.put(`http://api.com/funcionario/${funcionarioDados.id}`, funcionario);
+    api.put(`${baseUrl}funcionario/${funcionarioDados.id}`, funcionario);
   };
 
   return (

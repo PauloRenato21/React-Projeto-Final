@@ -10,6 +10,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   cardCategoryWhite: {
@@ -91,7 +92,7 @@ export default function ClubePut() {
   useEffect(() => {
     if (location.search.slice(1)) {
       let id = location.search.slice(1);
-      api.get(`http://api.com/clube/${id}`).then((res) => {
+      api.get(`${baseUrl}clube/${id}`).then((res) => {
         const dadosClube = res.data;
         dadosClube.map((clube) =>
           setClubeDados({
@@ -120,7 +121,7 @@ export default function ClubePut() {
   };
 
   const setDb = () => {
-    api.put(`http://api.com/clube/${clubeDados.id}`, clube);
+    api.put(`${baseUrl}clube/${clubeDados.id}`, clube);
   };
 
   return (

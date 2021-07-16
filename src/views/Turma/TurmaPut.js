@@ -12,6 +12,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import OptionsCategoria from "components/Options/OptionsCategoria";
 import OptionsFranquia from "components/Options/OptionsFranquia";
 import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   cardCategoryWhite: {
@@ -100,7 +101,7 @@ export default function TurmaPut() {
   useEffect(() => {
     if (location.search.slice(1)) {
       let id = location.search.slice(1);
-      api.get(`http://api.com/turma/${id}`).then((res) => {
+      api.get(`${baseUrl}turma/${id}`).then((res) => {
         const dadoTurma = res.data;
         dadoTurma.map((turma) =>
           setTurmaDados({
@@ -143,7 +144,7 @@ export default function TurmaPut() {
   };
 
   const setDb = () => {
-    api.put(`http://api.com/turma/${turmaDados.id}`, turma);
+    api.put(`${baseUrl}turma/${turmaDados.id}`, turma);
   };
 
   return (

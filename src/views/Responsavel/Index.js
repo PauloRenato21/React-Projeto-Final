@@ -9,6 +9,7 @@ import CardBody from "components/Card/CardBody.js";
 import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
 import api from "API/Api";
+import baseUrl from "API/Url";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
@@ -20,7 +21,7 @@ export default function Index() {
   const [responsaveis, setResponsavel] = useState([]);
 
   useEffect(() => {
-    api.get("http://api.com/responsavel").then((res) => {
+    api.get(`${baseUrl}responsavel`).then((res) => {
       const dadosRespon = res.data;
       setResponsavel(dadosRespon);
     });

@@ -11,6 +11,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import OptionsClube from "components/Options/OptionsClube";
 import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   cardCategoryWhite: {
@@ -116,7 +117,7 @@ export default function FranquiaCreate() {
   };
 
   const setDb = () => {
-    api.post("http://api.com/franquia", franquia);
+    api.post(`${baseUrl}franquia`, franquia);
   };
 
   return (

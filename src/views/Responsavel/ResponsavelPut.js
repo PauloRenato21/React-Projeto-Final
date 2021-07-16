@@ -9,6 +9,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   cardCategoryWhite: {
@@ -107,7 +108,7 @@ export default function ResponsavelPut() {
   useEffect(() => {
     if (location.search.slice(1)) {
       let id = location.search.slice(1);
-      api.get(`http://api.com/responsavel/${id}`).then((res) => {
+      api.get(`${baseUrl}responsavel/${id}`).then((res) => {
         const dadoResp = res.data;
         dadoResp.map((count) =>
           setResponsavelDados({
@@ -145,7 +146,7 @@ export default function ResponsavelPut() {
   };
 
   const setDb = () => {
-    api.put(`http://api.com/responsavel/${responsavelDados.id}`, responsavel);
+    api.put(`${baseUrl}responsavel/${responsavelDados.id}`, responsavel);
   };
 
   return (

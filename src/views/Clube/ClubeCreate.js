@@ -10,6 +10,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   cardCategoryWhite: {
@@ -87,7 +88,7 @@ export default function ClubeCreate() {
   };
 
   const setDb = () => {
-    api.post("http://api.com/clube", clube);
+    api.post(`${baseUrl}clube`, clube);
   };
 
   return (

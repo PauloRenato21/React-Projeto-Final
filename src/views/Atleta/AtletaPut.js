@@ -12,6 +12,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import OptionResp from "components/Options/OptionsResp";
 import OptionsTurma from "components/Options/OptionsTurma";
 import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   cardCategoryWhite: {
@@ -118,7 +119,7 @@ export default function AtletaPut() {
   useEffect(() => {
     if (location.search.slice(1)) {
       let id = location.search.slice(1);
-      api.get(`http://api.com/atleta/${id}`).then((res) => {
+      api.get(`${baseUrl}atleta/${id}`).then((res) => {
         const dadoAtleta = res.data;
         dadoAtleta.map((atl) =>
           setAtletaPut({
@@ -186,7 +187,7 @@ export default function AtletaPut() {
   };
 
   const setDb = () => {
-    api.put(`http://api.com/atleta/${atletaPut.id}`, atletaDados);
+    api.put(`${baseUrl}atleta/${atletaPut.id}`, atletaDados);
   };
 
   return (

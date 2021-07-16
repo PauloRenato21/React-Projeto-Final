@@ -9,6 +9,7 @@ import CardBody from "components/Card/CardBody.js";
 import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
 import api from "API/Api";
+import baseUrl from "API/Url";
 import deleteDb from "./AtletaDelete";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
@@ -21,7 +22,7 @@ export default function Index() {
   const [atleta, setAtleta] = useState([]);
 
   useEffect(() => {
-    api.get("http://api.com/atleta").then((res) => {
+    api.get(`${baseUrl}atleta`).then((res) => {
       const dadosAtleta = res.data;
       setAtleta(dadosAtleta);
     });

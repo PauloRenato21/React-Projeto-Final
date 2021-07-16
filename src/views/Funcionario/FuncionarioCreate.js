@@ -12,6 +12,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import OptionsFranquia from "components/Options/OptionsFranquia";
 import OptionsCargo from "components/Options/OptionsCargo";
 import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   cardCategoryWhite: {
@@ -121,7 +122,7 @@ export default function FuncionarioCreate() {
   };
 
   const setDb = () => {
-    api.post("http://api.com/funcionario", funcionario);
+    api.post(`${baseUrl}funcionario`, funcionario);
   };
 
   return (

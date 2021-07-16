@@ -9,6 +9,7 @@ import CardBody from "components/Card/CardBody.js";
 import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
 import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   buttonNewAtleta: {
@@ -33,7 +34,7 @@ export default function Index() {
   const [turmas, setTurma] = useState([]);
 
   useEffect(() => {
-    api.get("http://api.com/turma").then((res) => {
+    api.get(`${baseUrl}turma`).then((res) => {
       const dadosTurma = res.data;
       setTurma(dadosTurma);
     });

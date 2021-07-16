@@ -10,6 +10,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   cardCategoryWhite: {
@@ -84,7 +85,7 @@ export default function CategoriaCreate() {
   };
 
   const setDb = () => {
-    api.post("http://api.com/categoria", categoria);
+    api.post(`${baseUrl}categoria`, categoria);
   };
 
   return (

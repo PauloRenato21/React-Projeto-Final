@@ -12,6 +12,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import OptionsCategoria from "components/Options/OptionsCategoria";
 import OptionsFranquia from "components/Options/OptionsFranquia";
 import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   cardCategoryWhite: {
@@ -103,7 +104,7 @@ export default function TurmaCreate() {
   };
 
   const setDb = () => {
-    api.post("http://api.com/turma", turma);
+    api.post(`${baseUrl}turma`, turma);
   };
 
   return (

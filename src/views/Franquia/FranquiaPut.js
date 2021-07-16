@@ -11,6 +11,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import OptionsClube from "components/Options/OptionsClube";
 import api from "API/Api";
+import baseUrl from "API/Url";
 
 const styles = {
   cardCategoryWhite: {
@@ -109,7 +110,7 @@ export default function FranquiaPut() {
   useEffect(() => {
     if (location.search.slice(1)) {
       let id = location.search.slice(1);
-      api.get(`http://api.com/franquia/${id}`).then((res) => {
+      api.get(`${baseUrl}franquia/${id}`).then((res) => {
         const dadoFranquia = res.data;
         dadoFranquia.map((franquia) =>
           setFranquiaDados({
@@ -166,7 +167,7 @@ export default function FranquiaPut() {
   };
 
   const setDb = () => {
-    api.put(`http://api.com/franquia/${franquiaDados.id}`, franquia);
+    api.put(`${baseUrl}franquia/${franquiaDados.id}`, franquia);
   };
 
   return (
