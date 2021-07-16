@@ -84,9 +84,9 @@ export default function Index() {
                       funcionario.fk_cargo_id,
                       funcionario.fk_franquias_id,
                       <button
-                        // onClick={() =>
-                        //   (location.href = `/admin/atualizar/atleta?${atl.id}`)
-                        // }
+                        onClick={() =>
+                          (location.href = `/admin/atualizar/funcionario?${funcionario.id}`)
+                        }
                         id={funcionario.id}
                         key="1"
                         style={{
