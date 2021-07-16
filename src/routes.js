@@ -31,6 +31,7 @@ import AtletaHome from "views/Atleta/Index.js";
 import AtletaCreate from "views/Atleta/AtletaCreate";
 import AtletaPut from "views/Atleta/AtletaPut";
 import ResponsavelHome from "views/Responsavel/Index.js";
+import ResponsavelPut from "views/Responsavel/ResponsavelPut";
 import FuncionarioHome from "views/Funcionario/Index.js";
 import FuncionarioCreate from "views/Funcionario/FuncionarioCreate";
 import CargoHome from "views/Cargo/Index.js";
@@ -72,7 +73,7 @@ const dashboardRoutes = [
   },
   {
     path: "/atualizar/atleta",
-    name: "Atleta Atualizar",
+    name: "Atualizar Atleta",
     component: AtletaPut,
     layout: "/admin",
     invisible: true,
@@ -83,6 +84,13 @@ const dashboardRoutes = [
     icon: PeopleIcon,
     component: ResponsavelHome,
     layout: "/admin",
+  },
+  {
+    path: "/atualizar/responsavel",
+    name: "Atualizar Responsável",
+    component: ResponsavelPut,
+    layout: "/admin",
+    invisible: true,
   },
   {
     path: "/funcionario",
