@@ -34,7 +34,7 @@ export default function Index() {
   const [turmas, setTurma] = useState([]);
 
   useEffect(() => {
-    api.get(`${baseUrl}turma`).then((res) => {
+    api.get(`${baseUrl}turma/informacoes`).then((res) => {
       const dadosTurma = res.data;
       setTurma(dadosTurma);
     });
@@ -74,8 +74,10 @@ export default function Index() {
                       turma.turno,
                       turma.horario_inicial,
                       turma.horario_termino,
-                      turma.fk_categoria_id,
-                      turma.fk_franquias_id,
+                      turma.categoria[0]
+                        ? turma.categoria[0]["nome"]
+                        : "Nenhum",
+                      turma.franquia[0] ? turma.franquia[0]["nome"] : "Nenhum",
                       <button
                         onClick={() =>
                           (location.href = `/admin/atualizar/turma?${turma.id}`)
