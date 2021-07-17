@@ -34,7 +34,7 @@ export default function Index() {
   const [franquias, setFranquia] = useState([]);
 
   useEffect(() => {
-    api.get(`${baseUrl}franquia`).then((res) => {
+    api.get(`${baseUrl}franquia/informacoes`).then((res) => {
       const dadosFranquia = res.data;
       setFranquia(dadosFranquia);
     });
@@ -79,7 +79,7 @@ export default function Index() {
                       franquia.cidade,
                       franquia.telefone,
                       franquia.email,
-                      franquia.fk_clube_futebol_id,
+                      franquia.clube[0] ? franquia.clube[0]["nome"] : "Nenhum",
                       <button
                         onClick={() =>
                           (location.href = `/admin/atualizar/franquia?${franquia.id}`)
