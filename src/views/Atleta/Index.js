@@ -22,7 +22,7 @@ export default function Index() {
   const [atleta, setAtleta] = useState([]);
 
   useEffect(() => {
-    api.get(`${baseUrl}atleta`).then((res) => {
+    api.get(`${baseUrl}atleta/informacoes`).then((res) => {
       const dadosAtleta = res.data;
       setAtleta(dadosAtleta);
     });
@@ -69,8 +69,10 @@ export default function Index() {
                       atl.naturalidade,
                       atl.telefone,
                       atl.email,
-                      atl.fk_turma_id,
-                      atl.fk_Responsavel_id,
+                      atl.turma[0] ? atl.turma[0]["nome"] : "Nenhum",
+                      atl.responsavel[0]
+                        ? atl.responsavel[0]["nome"]
+                        : "Nenhum",
                       <button
                         onClick={() =>
                           (location.href = `/admin/atualizar/atleta?${atl.id}`)
