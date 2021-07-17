@@ -34,8 +34,9 @@ export default function Index() {
   const [funcionarios, setFuncionario] = useState([]);
 
   useEffect(() => {
-    api.get(`${baseUrl}funcionario`).then((res) => {
+    api.get(`${baseUrl}funcionario/informacoes`).then((res) => {
       const dadosFuncionarios = res.data;
+      console.log(dadosFuncionarios);
       setFuncionario(dadosFuncionarios);
     });
   }, []);
@@ -82,8 +83,12 @@ export default function Index() {
                       funcionario.naturalidade,
                       funcionario.telefone,
                       funcionario.email,
-                      funcionario.fk_cargo_id,
-                      funcionario.fk_franquias_id,
+                      funcionario.cargo[0]
+                        ? funcionario.cargo[0]["nome"]
+                        : "Nenhum",
+                      funcionario.franquia[0]
+                        ? funcionario.franquia[0]["nome"]
+                        : "Nenhum",
                       <button
                         onClick={() =>
                           (location.href = `/admin/atualizar/funcionario?${funcionario.id}`)
