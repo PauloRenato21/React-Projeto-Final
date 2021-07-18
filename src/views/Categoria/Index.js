@@ -10,6 +10,7 @@ import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
 import api from "API/Api";
 import baseUrl from "API/Url";
+import categoriadeleteDb from "./CategoriaDelete";
 
 const styles = {
   buttonNewAtleta: {
@@ -31,6 +32,7 @@ const useStyles = makeStyles(styles);
 export default function Index() {
   const classes = useStyles();
 
+  const [refresh, setRefresh] = useState(false);
   const [categorias, setCategoria] = useState([]);
 
   useEffect(() => {
@@ -38,7 +40,12 @@ export default function Index() {
       const dadosCategoria = res.data;
       setCategoria(dadosCategoria);
     });
-  }, []);
+  }, [refresh]);
+
+  const setValueId = (id) => {
+    categoriadeleteDb(id);
+    setRefresh(!refresh);
+  };
 
   return (
     <div>
@@ -76,7 +83,7 @@ export default function Index() {
                         <Edit htmlColor="#00acc1" />
                       </button>,
                       <button
-                        onClick="{() => setValueId(atl.id)}"
+                        onClick={() => setValueId(categoria.id)}
                         key="1"
                         style={{
                           border: "none",
