@@ -10,6 +10,7 @@ import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
 import api from "API/Api";
 import baseUrl from "API/Url";
+import funcionariodeleteDb from "./FuncionarioDelete";
 
 const styles = {
   buttonNewAtleta: {
@@ -31,6 +32,7 @@ const useStyles = makeStyles(styles);
 export default function Index() {
   const classes = useStyles();
 
+  const [refresh, setRefresh] = useState(false);
   const [funcionarios, setFuncionario] = useState([]);
 
   useEffect(() => {
@@ -39,7 +41,12 @@ export default function Index() {
       console.log(dadosFuncionarios);
       setFuncionario(dadosFuncionarios);
     });
-  }, []);
+  }, [refresh]);
+
+  const setValueId = (id) => {
+    funcionariodeleteDb(id);
+    setRefresh(!refresh);
+  };
 
   return (
     <div>
@@ -104,7 +111,7 @@ export default function Index() {
                         <Edit htmlColor="#00acc1" />
                       </button>,
                       <button
-                        onClick="{() => setValueId(atl.id)}"
+                        onClick={() => setValueId(funcionario.id)}
                         key="1"
                         style={{
                           border: "none",
