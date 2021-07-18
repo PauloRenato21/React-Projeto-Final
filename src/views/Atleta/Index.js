@@ -10,7 +10,7 @@ import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
 import api from "API/Api";
 import baseUrl from "API/Url";
-import deleteDb from "./AtletaDelete";
+import atletadeleteDb from "./AtletaDelete";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
@@ -19,6 +19,7 @@ const useStyles = makeStyles(styles);
 export default function Index() {
   const classes = useStyles();
 
+  const [refresh, setRefresh] = useState(false);
   const [atleta, setAtleta] = useState([]);
 
   useEffect(() => {
@@ -26,10 +27,11 @@ export default function Index() {
       const dadosAtleta = res.data;
       setAtleta(dadosAtleta);
     });
-  }, []);
+  }, [refresh]);
 
   const setValueId = (id) => {
-    deleteDb(id);
+    atletadeleteDb(id);
+    setRefresh(!refresh);
   };
 
   return (
