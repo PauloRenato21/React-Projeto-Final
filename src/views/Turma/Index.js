@@ -10,6 +10,7 @@ import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
 import api from "API/Api";
 import baseUrl from "API/Url";
+import turmadeleteDb from "./TurmaDelete";
 
 const styles = {
   buttonNewAtleta: {
@@ -31,6 +32,7 @@ const useStyles = makeStyles(styles);
 export default function Index() {
   const classes = useStyles();
 
+  const [refresh, setRefresh] = useState(false);
   const [turmas, setTurma] = useState([]);
 
   useEffect(() => {
@@ -38,7 +40,12 @@ export default function Index() {
       const dadosTurma = res.data;
       setTurma(dadosTurma);
     });
-  }, []);
+  }, [refresh]);
+
+  const setValueId = (id) => {
+    turmadeleteDb(id);
+    setRefresh(!refresh);
+  };
 
   return (
     <div>
@@ -93,7 +100,7 @@ export default function Index() {
                         <Edit htmlColor="#00acc1" />
                       </button>,
                       <button
-                        onClick="{() => setValueId(atl.id)}"
+                        onClick={() => setValueId(turma.id)}
                         key="1"
                         style={{
                           border: "none",
