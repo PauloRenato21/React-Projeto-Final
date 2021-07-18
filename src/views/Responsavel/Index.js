@@ -12,12 +12,14 @@ import api from "API/Api";
 import baseUrl from "API/Url";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import responsaveldeleteDb from "./ResponsavelDelete";
 
 const useStyles = makeStyles(styles);
 
 export default function Index() {
   const classes = useStyles();
 
+  const [refresh, setRefresh] = useState(false);
   const [responsaveis, setResponsavel] = useState([]);
 
   useEffect(() => {
@@ -25,7 +27,12 @@ export default function Index() {
       const dadosRespon = res.data;
       setResponsavel(dadosRespon);
     });
-  }, []);
+  }, [refresh]);
+
+  const setValueId = (id) => {
+    responsaveldeleteDb(id);
+    setRefresh(!refresh);
+  };
 
   return (
     <div>
@@ -77,7 +84,7 @@ export default function Index() {
                         <Edit htmlColor="#00acc1" />
                       </button>,
                       <button
-                        onClick="{() => setValueId(atl.id)}"
+                        onClick={() => setValueId(responsavel.id)}
                         key="1"
                         style={{
                           border: "none",
