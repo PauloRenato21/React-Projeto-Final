@@ -10,6 +10,7 @@ import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
 import api from "API/Api";
 import baseUrl from "API/Url";
+import turmadeleteDb from "./TurmaDelete";
 
 const styles = {
   buttonNewAtleta: {
@@ -31,14 +32,20 @@ const useStyles = makeStyles(styles);
 export default function Index() {
   const classes = useStyles();
 
+  const [refresh, setRefresh] = useState(false);
   const [turmas, setTurma] = useState([]);
 
   useEffect(() => {
-    api.get(`${baseUrl}turma`).then((res) => {
+    api.get(`${baseUrl}turma/informacoes`).then((res) => {
       const dadosTurma = res.data;
       setTurma(dadosTurma);
     });
-  }, []);
+  }, [refresh]);
+
+  const setValueId = (id) => {
+    turmadeleteDb(id);
+    setRefresh(!refresh);
+  };
 
   return (
     <div>
@@ -74,8 +81,10 @@ export default function Index() {
                       turma.turno,
                       turma.horario_inicial,
                       turma.horario_termino,
-                      turma.fk_categoria_id,
-                      turma.fk_franquias_id,
+                      turma.categoria[0]
+                        ? turma.categoria[0]["nome"]
+                        : "Nenhum",
+                      turma.franquia[0] ? turma.franquia[0]["nome"] : "Nenhum",
                       <button
                         onClick={() =>
                           (location.href = `/admin/atualizar/turma?${turma.id}`)
@@ -91,7 +100,7 @@ export default function Index() {
                         <Edit htmlColor="#00acc1" />
                       </button>,
                       <button
-                        onClick="{() => setValueId(atl.id)}"
+                        onClick={() => setValueId(turma.id)}
                         key="1"
                         style={{
                           border: "none",

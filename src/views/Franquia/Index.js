@@ -10,6 +10,7 @@ import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
 import api from "API/Api";
 import baseUrl from "API/Url";
+import franquiadeleteDb from "./FranquiaDelete";
 
 const styles = {
   buttonNewAtleta: {
@@ -31,14 +32,20 @@ const useStyles = makeStyles(styles);
 export default function Index() {
   const classes = useStyles();
 
+  const [refresh, setRefresh] = useState(false);
   const [franquias, setFranquia] = useState([]);
 
   useEffect(() => {
-    api.get(`${baseUrl}franquia`).then((res) => {
+    api.get(`${baseUrl}franquia/informacoes`).then((res) => {
       const dadosFranquia = res.data;
       setFranquia(dadosFranquia);
     });
-  }, []);
+  }, [refresh]);
+
+  const setValueId = (id) => {
+    franquiadeleteDb(id);
+    setRefresh(!refresh);
+  };
 
   return (
     <div>
@@ -79,7 +86,7 @@ export default function Index() {
                       franquia.cidade,
                       franquia.telefone,
                       franquia.email,
-                      franquia.fk_clube_futebol_id,
+                      franquia.clube[0] ? franquia.clube[0]["nome"] : "Nenhum",
                       <button
                         onClick={() =>
                           (location.href = `/admin/atualizar/franquia?${franquia.id}`)
@@ -95,7 +102,7 @@ export default function Index() {
                         <Edit htmlColor="#00acc1" />
                       </button>,
                       <button
-                        onClick="{() => setValueId(atl.id)}"
+                        onClick={() => setValueId(franquia.id)}
                         key="1"
                         style={{
                           border: "none",
