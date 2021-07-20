@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
@@ -58,45 +59,12 @@ const styles = {
     border: "1px solid #8e24aa",
     cursor: "pointer",
   },
-  label: {
-    display: "block",
-    marginTop: "24px",
-    font: "inherit",
-  },
-  input: {
-    border: "none",
-    borderBottom: "1px solid #d2d2d2",
-    width: "320px",
-    padding: "5px 0px",
-    fontSize: "1rem",
-  },
 };
 
 const useStyles = makeStyles(styles);
 
-export default function ResponsavelPut() {
+export default function ResponsavelCreate() {
   const classes = useStyles();
-
-  const [responsavelDados, setResponsavelDados] = useState({
-    id: "",
-    nome: "",
-    cpf: "",
-    grau_parentesco: "",
-    profissao: "",
-    local_trabalho: "",
-    telefone: "",
-    email: "",
-  });
-
-  const [responsavel, setResponsavel] = useState({
-    nome: "",
-    cpf: "",
-    grau_parentesco: "",
-    profissao: "",
-    local_trabalho: "",
-    telefone: "",
-    email: "",
-  });
 
   useEffect(() => {
     console.log(responsavel);
@@ -105,26 +73,15 @@ export default function ResponsavelPut() {
     }
   });
 
-  useEffect(() => {
-    if (location.search.slice(1)) {
-      let id = location.search.slice(1);
-      api.get(`${baseUrl}responsavel/${id}`).then((res) => {
-        const dadoResp = res.data;
-        dadoResp.map((count) =>
-          setResponsavelDados({
-            id: count.id,
-            nome: count.nome,
-            cpf: count.cpf,
-            grau_parentesco: count.grau_parentesco,
-            profissao: count.profissao,
-            local_trabalho: count.local_trabalho,
-            telefone: count.telefone,
-            email: count.email,
-          })
-        );
-      });
-    }
-  }, []);
+  const [responsavel, setResponsavel] = useState({
+    nome: "",
+    cpf: "",
+    grau_parentesco: "",
+    local_trabalho: "",
+    profissao: "",
+    telefone: "",
+    email: "",
+  });
 
   const setValueForm = () => {
     let nomeResp = document.getElementById("nome").value;
@@ -146,97 +103,120 @@ export default function ResponsavelPut() {
   };
 
   const setDb = () => {
-    api.put(`${baseUrl}responsavel/${responsavelDados.id}`, responsavel);
+    api.post(`${baseUrl}responsavel`, responsavel);
   };
 
   return (
     <div>
-      {console.log(responsavelDados)}
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Atualizar Responsável</h4>
+              <h4 className={classes.cardTitleWhite}>Cadastrar Responsavel</h4>
             </CardHeader>
             <form>
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
-                    <label className={classes.label}>Nome *</label>
-                    <input
-                      className={classes.input}
+                    <CustomInput
+                      labelText="Nome *"
                       id="nome"
-                      maxLength="100"
-                      minLength="4"
-                      required
-                      defaultValue={responsavelDados.nome}
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        maxLength: 45,
+                        minLength: 4,
+                        required: true,
+                      }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
-                    <label className={classes.label}>CPF *</label>
-                    <input
-                      className={classes.input}
+                    <CustomInput
+                      labelText="CPF *"
                       id="cpf"
-                      maxLength="14"
-                      minLength="14"
-                      placeholder="000.000.000-00"
-                      pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
-                      required
-                      defaultValue={responsavelDados.cpf}
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        maxLength: 14,
+                        minLength: 14,
+                        placeholder: "000.000.000-00",
+                        pattern: "[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}",
+                        required: true,
+                      }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
-                    <label className={classes.label}>Grau Parentesco *</label>
-                    <input
-                      className={classes.input}
+                    <CustomInput
+                      labelText="Parentesco *"
                       id="parentesco"
-                      maxLength="100"
-                      required
-                      defaultValue={responsavelDados.grau_parentesco}
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        maxLength: 10,
+                        required: true,
+                      }}
                     />
                   </GridItem>
                 </GridContainer>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
-                    <label className={classes.label}>Profissão *</label>
-                    <input
-                      className={classes.input}
-                      id="profissao"
-                      maxLength="50"
-                      required
-                      defaultValue={responsavelDados.profissao}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <label className={classes.label}>Local de Trabalho *</label>
-                    <input
-                      className={classes.input}
+                    <CustomInput
+                      labelText="Local de Trabalho *"
                       id="trabalho"
-                      maxLength="100"
-                      required
-                      defaultValue={responsavelDados.local_trabalho}
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        maxLength: 45,
+                        required: true,
+                      }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
-                    <label className={classes.label}>Telefone *</label>
-                    <input
-                      className={classes.input}
+                    <CustomInput
+                      labelText="Profissão *"
+                      id="profissao"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        maxLength: 5,
+                        required: true,
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <CustomInput
+                      labelText="Telefone *"
                       id="telefone"
-                      maxLength="50"
-                      required
-                      defaultValue={responsavelDados.telefone}
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        maxLength: 50,
+                        minLength: 7,
+                        placeholder: "(xx) xxxxx-xxxx",
+                        required: true,
+                      }}
                     />
                   </GridItem>
                 </GridContainer>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
-                    <label className={classes.label}>Email *</label>
-                    <input
-                      className={classes.input}
+                    <CustomInput
+                      labelText="Email *"
                       id="email"
-                      maxLength="100"
-                      required
-                      defaultValue={responsavelDados.email}
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        maxLength: 100,
+                        placeholder: "@gmail.com",
+                        required: true,
+                      }}
                     />
                   </GridItem>
                 </GridContainer>

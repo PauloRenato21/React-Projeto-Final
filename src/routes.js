@@ -27,10 +27,13 @@ import Unarchive from "@material-ui/icons/Unarchive";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 // core components/views for Admin layout
 import Home from "views/Home/Home";
+import Cliente from "views/Cliente/cliente";
 import AtletaHome from "views/Atleta/Index.js";
 import AtletaPut from "views/Atleta/AtletaPut";
+import AtletaCreate from "views/Atleta/AtletaCreate";
 import ResponsavelHome from "views/Responsavel/Index.js";
 import ResponsavelPut from "views/Responsavel/ResponsavelPut";
+import ResponsavelCreate from "views/Responsavel/ResponsavelCreate";
 import FuncionarioHome from "views/Funcionario/Index.js";
 import FuncionarioCreate from "views/Funcionario/FuncionarioCreate";
 import FuncionarioPut from "views/Funcionario/FuncionarioPut";
@@ -64,6 +67,12 @@ const dashboardRoutes = [
     invisible: true,
   },
   {
+    path: "/dashboard",
+    component: Cliente,
+    layout: "/cliente",
+    invisible: true,
+  },
+  {
     path: "/atleta",
     name: "Dashboard Atleta",
     icon: Person,
@@ -78,6 +87,13 @@ const dashboardRoutes = [
     invisible: true,
   },
   {
+    path: "/cadastrar/atleta",
+    name: "Atleta Cadastrar",
+    component: AtletaCreate,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
     path: "/responsavel",
     name: "Dashboard Responsável",
     icon: PeopleIcon,
@@ -88,6 +104,13 @@ const dashboardRoutes = [
     path: "/atualizar/responsavel",
     name: "Atualizar Responsável",
     component: ResponsavelPut,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/cadastrar/responsavel",
+    name: "Responsavel Cadastrar",
+    component: ResponsavelCreate,
     layout: "/admin",
     invisible: true,
   },

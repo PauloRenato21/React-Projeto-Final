@@ -10,7 +10,7 @@ import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
 import api from "API/Api";
 import baseUrl from "API/Url";
-import deleteDb from "./AtletaDelete";
+//import deleteDb from "./AtletaDelete";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
@@ -28,9 +28,9 @@ export default function Index() {
     });
   }, []);
 
-  const setValueId = (id) => {
-    deleteDb(id);
-  };
+  // const setValueId = (id) => {
+  //   deleteDb(id);
+  // };
 
   return (
     <div>
@@ -86,7 +86,7 @@ export default function Index() {
                         <Edit htmlColor="#00acc1" />
                       </button>,
                       <button
-                        onClick={() => setValueId(atl.id)}
+                        //onClick={() => setValueId(atl.id)}
                         key="1"
                         style={{
                           border: "none",

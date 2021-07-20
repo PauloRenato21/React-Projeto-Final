@@ -32,10 +32,7 @@ export default function Sidebar(props) {
       {routes.map((prop, key) => {
         var activePro = " ";
         var listItemClasses;
-<<<<<<< HEAD
-=======
         if(prop.invisible) return null;
->>>>>>> 3be954db4e5cb61898cbe85317e10b8ad00f9494
         if (prop.path === "/upgrade-to-pro") {
           activePro = classes.activePro + " ";
           listItemClasses = classNames({
